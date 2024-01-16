@@ -13,11 +13,11 @@ app.secret_key = "{8y8+f8wF=W1"
 
 
 priorizacao_dados = {
-    'Ordem': [1, 2, 3, 4, 5],
-    'Origem': ['', '', '', '', ''],
-    'Destino': ['', '', '', '', ''],
-    'Validador': ['', '', '', '', ''],
-    'Lead Time': ['', '', '', '', '']
+    'Ordem': [''],#, '', '', '', ''],
+    'Origem': [''],#, '', '', '', ''],
+    'Destino': [''],#, '', '', '', ''],
+    'Validador': [''],#, '', '', '', ''],
+    'Lead Time': ['']#, '', '', '', '']
 }
 priorizacao_df = pd.DataFrame(priorizacao_dados)
 
@@ -63,12 +63,36 @@ def trechos():
     return render_template("trechos.html", tabela_priorizacao=priorizacao_df, tabela_nivel_servico=nivel_servico_df)
 
 
+@app.route("/nova-priorizacao")
+def nova_priorizacao():
+    return render_template("nova_priorizacao.html")
+
+
+@app.route("/salvar-nova-priorizacao", methods=["POST",])
+def salvar_nova_priorizacao():
+    nova_priorizacao = {
+        'Ordem': request.form["ordem"],
+        'Origem': request.form["origem"],
+        'Destino': request.form["destino"],
+        'Validador': request.form["validador"],
+        'Lead Time': request.form["leadtime"]
+    }
+
+    if len(priorizacao_df) == 1 and priorizacao_df.iloc[0].eq('').all():
+        tamanho_df = 0
+    else:
+        tamanho_df = len(priorizacao_df)
+    priorizacao_df.loc[tamanho_df] = nova_priorizacao
+
+    return redirect("/trechos")
+
+
 @app.route("/trechos-salvar", methods=["POST",])
 def trechos_salvar():
-    for indice, linha in priorizacao_df.iterrows():
+    '''for indice, linha in priorizacao_df.iterrows():
         for coluna in priorizacao_df.columns:
             if not (coluna == "Ordem"):
-                priorizacao_df.at[indice, coluna] = request.form.get(f"{coluna}_{indice}")
+                priorizacao_df.at[indice, coluna] = request.form.get(f"{coluna}_{indice}")'''
 
     return redirect("/regras")
 

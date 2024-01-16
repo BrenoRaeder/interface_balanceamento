@@ -1,0 +1,26 @@
+{% extends "template.html" %}
+{% block conteudo %}
+
+<div id="nova_priorizacao_container">
+    <form action="salvar-nova-priorizacao" method="post">
+        <label for="ordem">Ordem</label>
+        <input type="text" name="ordem">
+
+        <label for="origem">Origem</label>
+        <input type="text" name="origem">
+
+        <label for="destino">Destino</label>
+        <input type="text" name="destino">
+
+        <label for="validador">Validador</label>
+        <input type="text" name="validador">
+
+        <label for="leadtime">Lead Time</label>
+        <input type="text" name="leadtime">
+
+        <input type="submit">
+    </form>
+</div>
+
+
+{% endblock %}

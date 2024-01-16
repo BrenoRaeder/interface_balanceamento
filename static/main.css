@@ -7,16 +7,23 @@ body{
     margin: 0;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
+h2{
+    text-align: center;
+}
 #main_container{
     background: #E1EFD8;
     width: 98vw;
     height: auto;
-    margin-top: 10vh;
+    min-height: 85vh;
+    margin-top: 5vh;
     padding-bottom: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 #nav_container{
     width: 100%;
-    margin-top: 10vh;
+    margin-top: 3vh;
     display: flex;
     justify-content: center;
 }
@@ -33,6 +40,7 @@ body{
     width: 100px;
     display: flex;
     justify-content: center;
+    cursor: default;
     border: 2px solid #557575;
 }
 .outras_paginas {
@@ -42,16 +50,31 @@ body{
     width: 100px;
     display: flex;
     justify-content: center;
+    cursor: default;
     border: 2px solid #557575;
 }
-
-/* página processo */
+input {
+    border: rgb(191, 188, 188) solid 1px;
+    padding: 6px 5px;
+}
 .opcoes_container{
-    padding-top: 10vh;
+    padding-top: 3vh;
     display: flex;
     justify-content: space-around;
     width: 80%;
     margin: auto;
+}
+
+/* home */
+#btn_home_container{
+    margin-top: 50vh;
+}
+/* home */
+
+
+/* página processo */
+.form_processo_container{
+    height: 100%;
 }
 .btn_container{
     width: 100%;
@@ -83,14 +106,16 @@ body{
 #opcoes_parametros li{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
-    gap: 10px;
+    gap: 5px;
 }
-
+#opcoes_parametros li input {
+    width: 60px;
+}
 /* página processo */
 
 /*pagina trechos*/
-
 table{
     background: #dfdfdf;
 }
@@ -98,6 +123,10 @@ table{
     border: none;
     background: none;
     width: 85px;
+}
+.input_tabela:focus{
+    border: none;
+    outline: none;
 }
 #salvar_tabela{
     background: #165858;

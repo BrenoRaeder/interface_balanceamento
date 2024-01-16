@@ -11,7 +11,7 @@
     </ul>
 </div>
 
-<form action="/processo-salvar" method="post">
+<form action="/processo-salvar" method="post" id="form_processo_container">
     <div class="opcoes_container">
         <div id="simluacao_container">
             <h2>Simulação</h2>
@@ -32,11 +32,11 @@
             <ul id="opcoes_parametros">
                 <li>
                     <label for="input_cobertura_origem">Cobertura Origem</label>
-                    <input type="text" id="input_cobertura_origem" name="input_cobertura_origem">
+                    <input type="number" id="input_cobertura_origem" name="input_cobertura_origem">
                 </li>
                 <li>
                     <label for="input_cobertura_destino">Cobertura Destino</label>
-                    <input type="text" id="input_cobertura_destino" name="input_cobertura_destino">
+                    <input type="number" id="input_cobertura_destino" name="input_cobertura_destino">
                 </li>
             </ul>
         </div>
