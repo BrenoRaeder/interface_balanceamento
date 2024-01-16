@@ -1,0 +1,116 @@
+body{
+    background: #165858;
+    color: #000;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0;
+    margin: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+#main_container{
+    background: #E1EFD8;
+    width: 98vw;
+    height: auto;
+    margin-top: 10vh;
+    padding-bottom: 10vh;
+}
+#nav_container{
+    width: 100%;
+    margin-top: 10vh;
+    display: flex;
+    justify-content: center;
+}
+#nav_container ul{
+    width: 80%;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+.pagina_atual {
+    background: #165858;
+    color: #fff;
+    padding: 10px 20px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    border: 2px solid #557575;
+}
+.outras_paginas {
+    background: #E1EFD8;
+    color: #165858;
+    padding: 10px 20px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    border: 2px solid #557575;
+}
+
+/* página processo */
+.opcoes_container{
+    padding-top: 10vh;
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+    margin: auto;
+}
+.btn_container{
+    width: 100%;
+    margin-top: 10vh;
+    display: flex;
+    justify-content: center;
+}
+.btn{
+    background: #165858;
+    color: #fff;
+    padding: 15px 25px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+}
+#opcoes_simulacao, #opcoes_parametros{
+    list-style: none;
+    padding: 10px 0;
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+#opcoes_parametros li{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+}
+
+/* página processo */
+
+/*pagina trechos*/
+
+table{
+    background: #dfdfdf;
+}
+.input_tabela{
+    border: none;
+    background: none;
+    width: 85px;
+}
+#salvar_tabela{
+    background: #165858;
+    color: #fff;
+    padding: 15px 25px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    margin: 100px auto
+}
+/*pagina trechos*/
+
+

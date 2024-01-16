@@ -1,0 +1,46 @@
+{% extends "template.html" %}
+{% block conteudo %}
+
+<div id="nav_container">
+    <ul>
+        <li class="outras_paginas">Processo</li>
+        <li class="outras_paginas">Trechos</li>
+        <li class="pagina_atual">Regras</li>
+        <li class="outras_paginas">Excluir</li>
+        <li class="outras_paginas">Consolidado</li>
+    </ul>
+</div>
+
+<div class="opcoes_container">
+    <div>
+        <h2>Regras</h2>
+        <form action="/excluir" >
+            <table class="table table-striped table-responsive table-bordered">
+                <thead>
+                    <tr>
+                        {% for coluna in tabela_regras.columns %}
+                            <th>{{ coluna }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for indice, linha in tabela_regras.iterrows() %}
+                        <tr>
+                            {% for coluna in tabela_regras.columns %}
+                                <td>
+                                    {{ linha[coluna] }}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        
+            <div class="btn_container">
+                <input type="submit" value="Próximo" class="btn">
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

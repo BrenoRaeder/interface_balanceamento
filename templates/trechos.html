@@ -1,0 +1,75 @@
+{% extends "template.html" %}
+{% block conteudo %}
+
+<div id="nav_container">
+    <ul>
+        <li class="outras_paginas">Processo</li>
+        <li class="pagina_atual">Trechos</li>
+        <li class="outras_paginas">Regras</li>
+        <li class="outras_paginas">Excluir</li>
+        <li class="outras_paginas">Consolidado</li>
+    </ul>
+</div>
+
+<div class="opcoes_container">
+    <div id="priorizacao_container">
+        <h2>Priorização</h2>
+        <form action="trechos-salvar" method="post">
+            <table class="table table-striped table-responsive table-bordered">
+                <thead>
+                    <tr>
+                        {% for coluna in tabela_priorizacao.columns %}
+                            <th>{{ coluna }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for indice, linha in tabela_priorizacao.iterrows() %}
+                        <tr>
+                            {% for coluna in tabela_priorizacao.columns %}
+                                {% if coluna == "Ordem" %}
+                                <td>
+                                    {{ linha[coluna] }}
+                                </td>
+                                {% else %}
+                                <td>
+                                    <input class="input_tabela" type="text" name="{{ coluna }}_{{ indice }}" value="{{ linha[coluna] }}">
+                                </td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="btn_container">
+                <input type="submit" value="Próximo" class="btn">
+            </div>
+        </form>
+    </div>
+
+    <div id="nivel_servico_container">
+        <h2>Nível de Serviço</h2>
+        <table class="table table-striped table-responsive table-bordered">
+            <thead>
+                <tr>
+                    {% for coluna in tabela_nivel_servico.columns %}
+                        <th>{{ coluna }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for indice, linha in tabela_nivel_servico.iterrows() %}
+                    <tr>
+                        {% for coluna in tabela_nivel_servico.columns %}
+                            <td>
+                                {{ linha[coluna] }}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "template.html" %}
+{% block conteudo %}
+
+<div id="nav_container">
+    <ul>
+        <li class="pagina_atual">Processo</li>
+        <li class="outras_paginas">Trechos</li>
+        <li class="outras_paginas">Regras</li>
+        <li class="outras_paginas">Excluir</li>
+        <li class="outras_paginas">Consolidado</li>
+    </ul>
+</div>
+
+<form action="/processo-salvar" method="post">
+    <div class="opcoes_container">
+        <div id="simluacao_container">
+            <h2>Simulação</h2>
+            <ul id="opcoes_simulacao">
+                <li>
+                    <input type="checkbox" id="checkbox_mata_falta" name="checkbox_mata_falta">
+                    <label for="checkbox_mata_falta">Mata Falta</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="checkbox_excesso" name="checkbox_excesso">
+                    <label for="checkbox_excesso">Excesso</label>
+                </li>
+            </ul>
+        </div>
+
+        <div id="parametros_container">
+            <h2>Parâmetros</h2>
+            <ul id="opcoes_parametros">
+                <li>
+                    <label for="input_cobertura_origem">Cobertura Origem</label>
+                    <input type="text" id="input_cobertura_origem" name="input_cobertura_origem">
+                </li>
+                <li>
+                    <label for="input_cobertura_destino">Cobertura Destino</label>
+                    <input type="text" id="input_cobertura_destino" name="input_cobertura_destino">
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="btn_container">
+        <input type="submit" value="Iniciar Balanceamento" class="btn">
+    </div>
+</form>
+
+
+{% endblock %}
