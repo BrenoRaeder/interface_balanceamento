@@ -21,6 +21,7 @@
                         {% for coluna in tabela_priorizacao.columns %}
                             <th>{{ coluna }}</th>
                         {% endfor %}
+                        <th class="titulo_excluir_tabela"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,16 +32,19 @@
                                     {{ linha[coluna] }}
                                 </td>
                             {% endfor %}
+                            <td class="excluir_tabela" id={{indice}}>X</td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
-            <div id="btn_add_priorizacao" onclick="addNovaPriorizacao()">+</div>
+            <div class="btn_add_tabela_container">
+                <div class="btn_add_tabela" onclick="addNovaPriorizacao()">+</div>
+            </div>
         </div>
     
         <div id="nivel_servico_container">
             <h2>Nível de Serviço</h2>
-            <table class="table table-striped table-responsive table-bordered">
+            <table id="tabela_nivel_priorizacao"class="table table-striped table-responsive table-bordered">
                 <thead>
                     <tr>
                         {% for coluna in tabela_nivel_servico.columns %}

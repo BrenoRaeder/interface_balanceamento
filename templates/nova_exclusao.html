@@ -1,0 +1,27 @@
+{% extends "template.html" %}
+{% block conteudo %}
+
+<div class="novo_item_tabela">
+    <form action="salvar-nova-exclusao" method="post">
+        <div>
+            <div>
+                <label for="cod_prod">COD_PROD</label>
+                <input type="text" name="cod_prod">
+            </div>
+            
+            <div>
+                <label for="desc_prod">DESC_PROD</label>
+                <input type="text" name="desc_prod">
+            </div>
+            
+            <div>
+                <label for="origem">Origem</label>
+                <input type="text" name="origem">
+            </div>
+        </div>
+        
+        <input type="submit" class="btn_novo_item_tabela" value="Salvar">
+    </form>
+</div>
+
+{% endblock %}

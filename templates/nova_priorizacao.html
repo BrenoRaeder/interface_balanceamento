@@ -1,26 +1,47 @@
 {% extends "template.html" %}
 {% block conteudo %}
 
-<div id="nova_priorizacao_container">
-    <form action="salvar-nova-priorizacao" method="post">
-        <label for="ordem">Ordem</label>
-        <input type="text" name="ordem">
+<div class="novo_item_tabela">
+    <form action="salvar-nova-priorizacao" method="post" id="form_nova_priorizacao">
+        <div>
+            <label for="destino">Destino</label>
+            <select name="destino" id="destino" onchange="alteraParametroPriorizacao()">
+                {% for item in lista_destino %}
+                    {% if item == destino_selecionado %}
+                        <option value={{item}} selected>{{item}}</option>
+                    {% else %}
+                        <option value={{item}}>{{item}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
 
-        <label for="origem">Origem</label>
-        <input type="text" name="origem">
+        <div>
+            <label name="ordem">Ordem</label>
+            <input type="text" name="ordem" value={{ordem}} readonly>
+        </div>
+        
+        <div>   
+            <label for="origem">Origem</label>
+            <select name="origem" id="origem">
+                {% for item in lista_origem %}
+                    <option value={{item}}>{{item}}</option>
+                {% endfor %}
+            </select>
+        </div>
 
-        <label for="destino">Destino</label>
-        <input type="text" name="destino">
+        <div>
+            <label for="validador">Validador</label>
+            <input type="text" name="validador">
+        </div>
 
-        <label for="validador">Validador</label>
-        <input type="text" name="validador">
+        <div>
+            <label for="leadtime">Lead Time</label>
+            <input type="text" name="leadtime">
+        </div>
 
-        <label for="leadtime">Lead Time</label>
-        <input type="text" name="leadtime">
-
-        <input type="submit">
+        <input type="submit" class="btn_novo_item_tabela" value="Salvar">
     </form>
 </div>
-
 
 {% endblock %}

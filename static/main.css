@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 body{
     background: #165858;
     color: #000;
@@ -5,7 +6,7 @@ body{
     justify-content: flex-end;
     padding: 0;
     margin: 0;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+    font-family: 'Inter', sans-serif;
 }
 h2{
     text-align: center;
@@ -20,6 +21,7 @@ h2{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-shadow: -1px -1px 20px #302f2f;
 }
 #nav_container{
     width: 100%;
@@ -91,7 +93,13 @@ input {
     justify-content: center;
     cursor: pointer;
     font-weight: bold;
-    border: none;
+    border: 3px solid #165858;
+    transition: .4s;
+}
+.btn:hover{
+    background: #E1EFD8;
+    color: #165858;
+    border-color: #165858;
 }
 #opcoes_simulacao, #opcoes_parametros{
     list-style: none;
@@ -119,15 +127,6 @@ input {
 table{
     background: #dfdfdf;
 }
-.input_tabela{
-    border: none;
-    background: none;
-    width: 85px;
-}
-.input_tabela:focus{
-    border: none;
-    outline: none;
-}
 #salvar_tabela{
     background: #165858;
     color: #fff;
@@ -140,6 +139,118 @@ table{
     border: none;
     margin: 100px auto
 }
+#tabela_nivel_priorizacao{
+    font-size: 10px;
+}
+#tabela_nivel_priorizacao th,
+#tabela_nivel_priorizacao td {
+  padding: 3px 0.75rem;
+  vertical-align: top;
+}
 /*pagina trechos*/
 
+/*pagina add tabela*/
+.btn_add_tabela_container{
+    display: flex;
+    justify-content: center;
+}
+.btn_add_tabela{
+    border-radius: 50%;
+    padding: 8px 15px;
+    font-weight: bolder;
+    font-size: 22px;
+    background:#262626;
+    color: #dfdfdf;
+    border: 2px solid #dfdfdf;
+    cursor: pointer;
+    transition: .4s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    width: 14px;
+}
+.btn_add_tabela:hover{
+    background:#dfdfdf;
+    color: #262626;
+    border-color:#a9a6a6;
+}
+.novo_item_tabela{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    color: #272626;
+}
+.novo_item_tabela form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 60%;
+    height: 100%;
+    margin: 10vh auto 0 auto;
+    gap: 5px;
+    background: #d1e7c3;
+    border-radius: 5px;
+    align-items: center;
+    padding: 5vh 0;
+}
+.novo_item_tabela label{
+    margin-top: 15px;
+    font-weight: bold;
+}
+.novo_item_tabela div{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.novo_item_tabela div input, .novo_item_tabela select{
+    width: 30vw;
+    padding: 10px 5px;
+    -ms-box-sizing:content-box;
+    -moz-box-sizing:content-box;
+    -webkit-box-sizing:content-box; 
+    box-sizing:content-box;
+    border: rgb(191, 188, 188) solid 1px;
+}
+.btn_novo_item_tabela{
+    background: #165858;
+    color: #d1e7c3;
+    padding: 10px 15px;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: bold;
+    border: 3px solid #165858;
+    transition: .4s;
+    margin-top: 5vh;
+    margin-left: 35%;
+}
+.btn_novo_item_tabela:hover{
+    background: #d1e7c3;
+    color: #165858;
+    border-color: #165858;
+}
+/*pagina add tabela*/
 
+/*excluir tabela*/
+.excluir_tabela{
+    color: #bd1414;
+    font-weight: bolder;
+    font-size: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #dfdfdf;
+    border-color: #dfdfdf;
+    cursor: pointer;
+    transition: .4s;
+}
+.excluir_tabela:hover{
+    background: #bd1414;
+    color: #dfdfdf;
+}
+table{
+    border: none;
+}
+/*excluir tabela*/

@@ -11,41 +11,40 @@
     </ul>
 </div>
 
-<div class="opcoes_container">
-    <div id="excluir_container">
-        <h2>Priorização</h2>
-        <form action="excluir-salvar" method="post">
+<form action="excluir-salvar" method="post">
+    <div class="opcoes_container">
+        <div id="excluir_container">
+            <h2>Exclusão</h2>
             <table class="table table-striped table-responsive table-bordered">
                 <thead>
                     <tr>
                         {% for coluna in tabela_excluir.columns %}
                             <th>{{ coluna }}</th>
                         {% endfor %}
+                        <th class="titulo_excluir_tabela"></th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for indice, linha in tabela_excluir.iterrows() %}
                         <tr>
                             {% for coluna in tabela_excluir.columns %}
-                                {% if coluna == "Ordem" %}
                                 <td>
                                     {{ linha[coluna] }}
                                 </td>
-                                {% else %}
-                                <td>
-                                    <input class="input_tabela" type="text" name="{{ coluna }}_{{ indice }}" value="{{ linha[coluna] }}">
-                                </td>
-                                {% endif %}
                             {% endfor %}
+                            <td class="excluir_tabela" id={{indice}}>X</td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
-            <div class="btn_container">
-                <input type="submit" value="Próximo" class="btn">
+            <div class="btn_add_tabela_container">
+                <div class="btn_add_tabela" onclick="addNovaExclusao()">+</div>
             </div>
-        </form>
+        </div>
     </div>
-</div>
+    <div class="btn_container">
+        <input type="submit" value="Próximo" class="btn">
+    </div>
+</form>
 
 {% endblock %}

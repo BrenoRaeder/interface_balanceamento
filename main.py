@@ -3,7 +3,8 @@ from flask import (
     render_template,
     request,
     session,
-    redirect
+    redirect,
+    jsonify
 )
 import pandas as pd
 
@@ -13,27 +14,24 @@ app.secret_key = "{8y8+f8wF=W1"
 
 
 priorizacao_dados = {
-    'Ordem': [''],#, '', '', '', ''],
-    'Origem': [''],#, '', '', '', ''],
-    'Destino': [''],#, '', '', '', ''],
-    'Validador': [''],#, '', '', '', ''],
-    'Lead Time': ['']#, '', '', '', '']
+    'Ordem': [''],
+    'Origem': [''],
+    'Destino': [''],
+    'Validador': [''],
+    'Lead Time': ['']
 }
+
 priorizacao_df = pd.DataFrame(priorizacao_dados)
-
-
-nivel_servico_dados = {
-    'Ordem': [1, 2, 3, 4, 5],
-    'Destino': ['ES01', 'RN01', 'SP07', 'RS01', 'PR01'],
-    'NS DIA': [77.78, 79.66, 81.54, 82.55, 83.42]
-}
-nivel_servico_df = pd.DataFrame(nivel_servico_dados)
+origem_destino_df = pd.read_excel('../bases_balanceamento_teste/OrigemDestino.xlsx')
+nivel_servico_df = pd.read_excel('../bases_balanceamento_teste/NivelServico.xlsx')
+nivel_servico_df["NS DIA"] = nivel_servico_df["NS DIA"] * 100
+nivel_servico_df["NS DIA"] = nivel_servico_df["NS DIA"].map('{:.2f}%'.format)
 
 
 excluir_dados = {
-    'COD_PROD': ['', '', '', '', ''],
-    'DESC_PROD': ['', '', '', '', ''],
-    'Origem': ['', '', '', '', '']
+    'COD_PROD': [''],
+    'DESC_PROD': [''],
+    'Origem': ['']
 }
 excluir_df = pd.DataFrame(excluir_dados)
 
@@ -60,13 +58,34 @@ def processo_salvar():
 
 @app.route("/trechos")
 def trechos():
+    session["input_destino"] = 'ES01'
     return render_template("trechos.html", tabela_priorizacao=priorizacao_df, tabela_nivel_servico=nivel_servico_df)
 
 
 @app.route("/nova-priorizacao")
 def nova_priorizacao():
-    return render_template("nova_priorizacao.html")
+    if session["input_destino"] == '':
+        lista_origem = origem_destino_df["ORIGEM"].to_list()
+        ordem = ''
+    else:
+        lista_origem = origem_destino_df.query(f"DESTINO == '{session["input_destino"]}'")["ORIGEM"].to_list()
+        ordem = nivel_servico_df.query(f"DESTINO == '{session["input_destino"]}'")["ORDEM"].to_list()[0]
+    return render_template(
+        "nova_priorizacao.html",
+        ordem=ordem,
+        lista_destino=nivel_servico_df["DESTINO"].to_list(),
+        lista_origem=lista_origem,
+        destino_selecionado=session["input_destino"]
+    )
 
+@app.route("/atualiza-parametros-priorizacao", methods=["POST",])
+def atualiza_nova_priorizacao():
+    data = request.json
+    input_destino = data.get("input_destino")
+    session["input_destino"] = input_destino
+    print(input_destino)
+
+    return jsonify({"status": "Dados recebidos com sucesso!"})
 
 @app.route("/salvar-nova-priorizacao", methods=["POST",])
 def salvar_nova_priorizacao():
@@ -87,13 +106,27 @@ def salvar_nova_priorizacao():
     return redirect("/trechos")
 
 
+@app.route("/excluir-tabela-priorizacao", methods=["POST",])
+def excluir_tabela_priorizacao():
+    data = request.json
+    linha_excluir = int(data.get("linha_excluir"))
+
+    if "trechos" in data.get("final_url"):
+        global priorizacao_df
+        priorizacao_df = priorizacao_df.drop(linha_excluir)
+    elif "excluir" in data.get("final_url"):
+        global excluir_df
+        excluir_df = excluir_df.drop(linha_excluir)
+
+    return jsonify({"status": "Dados recebidos com sucesso!"})
+
+
 @app.route("/trechos-salvar", methods=["POST",])
 def trechos_salvar():
     '''for indice, linha in priorizacao_df.iterrows():
         for coluna in priorizacao_df.columns:
             if not (coluna == "Ordem"):
                 priorizacao_df.at[indice, coluna] = request.form.get(f"{coluna}_{indice}")'''
-
     return redirect("/regras")
 
 
@@ -107,12 +140,34 @@ def excluir():
     return render_template("excluir.html", tabela_excluir=excluir_df)
 
 
+@app.route("/nova-exclusao")
+def nova_exclusao():
+    return render_template("nova_exclusao.html")
+
+
 @app.route("/excluir-salvar", methods=["POST",])
 def excluir_salvar():
-    for indice, linha in excluir_df.iterrows():
+    '''for indice, linha in excluir_df.iterrows():
         for coluna in excluir_df.columns:
-            excluir_df.at[indice, coluna] = request.form.get(f"{coluna}_{indice}")
+            excluir_df.at[indice, coluna] = request.form.get(f"{coluna}_{indice}")'''
     return redirect("/consolidado")
+
+
+@app.route("/salvar-nova-exclusao", methods=["POST",])
+def salvar_nova_exclusao():
+    nova_exclusao = {
+        "COD_PROD": request.form["cod_prod"],
+        "DESC_PROD": request.form["desc_prod"],
+        "Origem": request.form["origem"]
+    }
+
+    if len(excluir_df) == 1 and excluir_df.iloc[0].eq('').all():
+        tamanho_df = 0
+    else:
+        tamanho_df = len(excluir_df)
+    excluir_df.loc[tamanho_df] = nova_exclusao
+
+    return redirect("/excluir")
 
 
 @app.route("/consolidado")
