@@ -1,0 +1,23 @@
+{% extends "template.html" %}
+{% block conteudo %}
+
+<div class="autenticacao_container">
+    <h2>Cadastro</h2>
+    <form action="/salvar-cadastro-usuario" method="post">
+        <div>
+            <label for="nome_cadastro">Nome</label>
+            <input type="text" name="nome_cadastro">
+        </div>
+        <div>
+            <label for="senha_cadastro">Senha</label>
+            <input type="password" name="senha_cadastro">
+        </div>
+        
+        <input type="submit" value="Cadastrar" class="btn_autenticacao">
+        <a href="/">Voltar ao Login</a>
+    </form>
+</div>
+
+
+
+{% endblock %}

@@ -1,11 +1,23 @@
 {% extends "template.html" %}
 {% block conteudo %}
 
-<form action="/processo">
-    <div class="btn_container" id="btn_home_container">
-        <input type="submit" value="Iniciar" class="btn">
-    </div>
-</form>
+<div class="autenticacao_container">
+    <h2>Login</h2>
+    <form action="/login-usuario" method="post">
+        <div>
+            <label for="nome_login">Nome</label>
+            <input type="text" name="nome_login">
+        </div>
+        <div>
+            <label for="senha_login">Senha</label>
+            <input type="password" name="senha_login">
+        </div>
+        
+        <input type="submit" value="Entrar" class="btn_autenticacao">
+        <a href="/cadastro-usuario">Novo Cadastro</a>
+    </form>
+</div>
+
 
 
 {% endblock %}

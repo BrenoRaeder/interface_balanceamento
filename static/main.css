@@ -149,7 +149,7 @@ table{
 }
 /*pagina trechos*/
 
-/*pagina add tabela*/
+/*pagina add tabela e autenticacao*/
 .btn_add_tabela_container{
     display: flex;
     justify-content: center;
@@ -175,7 +175,7 @@ table{
     color: #262626;
     border-color:#a9a6a6;
 }
-.novo_item_tabela{
+.novo_item_tabela, .autenticacao_container{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -183,7 +183,7 @@ table{
     height: 100%;
     color: #272626;
 }
-.novo_item_tabela form{
+.novo_item_tabela form, .autenticacao_container form{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -196,16 +196,25 @@ table{
     align-items: center;
     padding: 5vh 0;
 }
-.novo_item_tabela label{
+.autenticacao_container h2{
+    margin-top: 15vh;
+}
+.autenticacao_container form {
+    width: 40%;
+    height: 50vh;
+    margin-top: 0;
+}
+.novo_item_tabela label, .autenticacao_container label{
     margin-top: 15px;
     font-weight: bold;
 }
-.novo_item_tabela div{
+.novo_item_tabela div, .autenticacao_container div{
     display: flex;
     flex-direction: column;
     gap: 3px;
 }
-.novo_item_tabela div input, .novo_item_tabela select{
+.novo_item_tabela div input, .novo_item_tabela select,
+.autenticacao_container div input{
     width: 30vw;
     padding: 10px 5px;
     -ms-box-sizing:content-box;
@@ -228,12 +237,30 @@ table{
     margin-top: 5vh;
     margin-left: 35%;
 }
+.btn_autenticacao {
+    background: #165858;
+    color: #d1e7c3;
+    padding: 10px 15px;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: bold;
+    border: 3px solid #165858;
+    transition: .4s;
+    margin-top: 5vh;
+}
 .btn_novo_item_tabela:hover{
     background: #d1e7c3;
     color: #165858;
     border-color: #165858;
 }
-/*pagina add tabela*/
+.btn_autenticacao:hover{
+    background: #d1e7c3;
+    color: #165858;
+    border-color: #165858;
+}
+/*pagina add tabela e autenticacao*/
 
 /*excluir tabela*/
 .excluir_tabela{

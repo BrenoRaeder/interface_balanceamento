@@ -7,6 +7,7 @@ from flask import (
     jsonify
 )
 import pandas as pd
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 app = Flask(__name__)
@@ -38,7 +39,32 @@ excluir_df = pd.DataFrame(excluir_dados)
 
 @app.route("/")
 def home():
+    if session["senha_usuario_cadastro"] is not None:
+        print(session["senha_usuario_cadastro"])
     return render_template("home.html")
+
+
+@app.route("/login-usuario", methods=["POST",])
+def login_usuario():
+    nome_login = request.form["nome_login"]
+    senha_login = request.form["senha_login"]
+    #TODO - lógica temporária, autenticação de usuário deve ser salva em banco
+    if nome_login == session["nome_usuario_cadastro"] and check_password_hash(session["senha_usuario_cadastro"], senha_login):
+        return redirect("/processo")
+    else:
+        return redirect("/")
+
+@app.route("/cadastro-usuario")
+def cadastro_usuario():
+    return render_template("cadastro_usuario.html")
+
+
+@app.route("/salvar-cadastro-usuario", methods=["POST",])
+def salvar_cadastro_usuario():
+    # TODO - lógica temporária, autenticação de usuário deve ser salva em banco
+    session["nome_usuario_cadastro"] = request.form["nome_cadastro"]
+    session["senha_usuario_cadastro"] = generate_password_hash(request.form["senha_cadastro"], method="pbkdf2:sha256")
+    return redirect("/")
 
 
 @app.route("/processo")
@@ -64,12 +90,8 @@ def trechos():
 
 @app.route("/nova-priorizacao")
 def nova_priorizacao():
-    if session["input_destino"] == '':
-        lista_origem = origem_destino_df["ORIGEM"].to_list()
-        ordem = ''
-    else:
-        lista_origem = origem_destino_df.query(f"DESTINO == '{session["input_destino"]}'")["ORIGEM"].to_list()
-        ordem = nivel_servico_df.query(f"DESTINO == '{session["input_destino"]}'")["ORDEM"].to_list()[0]
+    lista_origem = origem_destino_df.query(f"DESTINO == '{session["input_destino"]}'")["ORIGEM"].to_list()
+    ordem = nivel_servico_df.query(f"DESTINO == '{session["input_destino"]}'")["ORDEM"].to_list()[0]
     return render_template(
         "nova_priorizacao.html",
         ordem=ordem,
