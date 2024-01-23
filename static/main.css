@@ -66,6 +66,30 @@ input {
     width: 80%;
     margin: auto;
 }
+#usuario_logout_container{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+    padding: 5px 0px;
+}
+#btn_logout{
+    margin-right: 10px;
+    color: #E1EFD8;
+    font-weight: bolder;
+    font-size: 15px;
+    background: #165858;
+    border: none;
+    cursor: pointer;
+    transition: .4s;
+    outline: none;
+    padding: 5px;
+}
+#btn_logout:hover{
+    background: #bd1414;
+    color: #E1EFD8;
+}
 
 /* home */
 #btn_home_container{

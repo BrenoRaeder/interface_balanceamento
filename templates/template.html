@@ -5,10 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/main.css">
     <link rel="stylesheet" href="../static/table.css">
-    <title>Processo</title>
+    <title>Balanceamento</title>
 </head>
 <body>
     <div id="main_container">
+        {% if g.usuario %}
+            <div id="usuario_logout_container">
+                <div id="usuario_nome">Usuário: {{ g.usuario }}</div>
+                <button id="btn_logout" onclick="logout()">Logout</button>
+            </div>
+        {% endif %}
 
         {%  block conteudo %}
 
@@ -23,6 +29,9 @@
     }
     function addNovaExclusao() {
         window.location.href = "/nova-exclusao"
+    }
+    function logout(){
+        window.location.href = "/logout-usuario"
     }
 </script>
 <script src="../static/scripts/altera_parametro_priorizacao.js"></script>
